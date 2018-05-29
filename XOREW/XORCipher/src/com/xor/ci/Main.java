@@ -1,0 +1,9 @@
+package com.xor.ci;
+
+public class Main {
+	
+	public static void main(String[] args) {
+
+	}
+
+}
