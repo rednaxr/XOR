@@ -83,16 +83,16 @@ public class Main implements ActionListener {
 		input = paperwork.readFile(inputFileTF.getText());					//read in input file
 		
 		if(proceed == true) {
-			if(ae.getSource().equals(encryptBtn)) {							//If ENCRYPT is pushed...
-				key = cipher.newRandomKey();								//create a random key
-				output = cipher.XOR(input, key);							//encrypt input using that key
-				paperwork.writeFile(outputFileTF.getText(), output);		//write output to output file
-				paperwork.writeFile(keyFileTF.getText(), key);				//write key to key file
+			if(ae.getSource().equals(encryptBtn)) {							//If ENCRYPT is pushed:
+				key = cipher.newRandomKey();									//create a random key
+				output = cipher.XOR(input, key);								//encrypt input using that key
+				paperwork.writeFile(outputFileTF.getText(), output);			//write output to output file
+				paperwork.writeFile(keyFileTF.getText(), key);					//write key to key file
 			}
-			else {															//If Decrypt is pushed...
-				key = paperwork.readFile(keyFileTF.getText());				//read in key file
-				output = cipher.XOR(input, key);							//encrypt output using key
-				paperwork.writeFile(outputFileTF.getText(), output);		//write output to output file
+			else {															//If Decrypt is pushed:
+				key = paperwork.readFile(keyFileTF.getText());					//read in key file
+				output = cipher.XOR(input, key);								//encrypt output using key
+				paperwork.writeFile(outputFileTF.getText(), output);			//write output to output file
 			}
 		}
 		

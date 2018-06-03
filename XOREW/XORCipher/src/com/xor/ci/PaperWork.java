@@ -6,7 +6,7 @@ public class PaperWork {
 		
 	}
 	
-	//Reads in a file as an array of bytes
+	//reads in a file as an array of bytes
 	public byte[] readFile(String fileName) {
 		byte[] output = new byte[0];
 		return output;
