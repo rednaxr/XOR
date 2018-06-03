@@ -6,7 +6,7 @@ public class Cipher {
 		
 	}
 	
-	//XOR Ciphers a string of bytes based on an inputted key
+	//XOR Ciphers a byte[] input based on a byte[] key
 	public byte[] XOR(byte[] input, byte[] key) {
 		byte[] output = new byte[input.length];
 		boolean[] in8;								//(stores the relevant byte of the input as a boolean array)
