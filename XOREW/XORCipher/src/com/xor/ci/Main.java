@@ -41,7 +41,7 @@ public class Main implements ActionListener {
 	public Main() {
 		
 		//Set up window
-		window.setSize(400, 140);
+		window.setSize(400, 200);
 		window.setLocation(100, 100);
 		window.setLayout(new GridLayout(5, 2));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,18 +71,13 @@ public class Main implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent ae) {
-		proceed = true;														//Do not proceed if any files are invalid (scanner cannot  be created)
-		Scanner inputfileTxtReader = null;
-		Scanner outputfileTxtReader = null;
-		Scanner keyfileTxtReader = null;
-		try {
-			inputfileTxtReader = new Scanner(new File(inputFileTF.getText()));
-			outputfileTxtReader = new Scanner(new File(inputFileTF.getText()));
-			keyfileTxtReader = new Scanner(new File(inputFileTF.getText()));
+		
+		if(paperwork.checkFile(inputFileTF.getText()) && paperwork.checkFile(keyFileTF.getText())
+				&& paperwork.checkFile(outputFileTF.getText())) {			//only proceed if files in question exist
+			proceed = true;
 		}
-		catch(FileNotFoundException ex) {
+		else {
 			proceed = false;
-			statusLbl.setText("Invalid File(s)");
 		}
 		
 		input = paperwork.readFile(inputFileTF.getText());					//read in input file
@@ -101,10 +96,7 @@ public class Main implements ActionListener {
 			}
 		}
 		
-		inputfileTxtReader.close();
-		outputfileTxtReader.close();
-		keyfileTxtReader.close();
-		
 	}
+	
 
 }
