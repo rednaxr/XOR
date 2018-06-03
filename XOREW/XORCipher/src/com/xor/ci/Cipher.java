@@ -6,10 +6,24 @@ public class Cipher {
 		
 	}
 	
+	//XOR Ciphers a string of bytes based on an inputted key
 	public byte[] XOR(byte[] input, byte[] key) {
 		byte[] output = new byte[input.length];
-		for(int x = 0; x < input.length; x++) {
-			output[x] = key[x%key.length];
+		boolean[] in8;								//(stores the relevant byte of the input as a boolean array)
+		boolean[] key8;								//(stores the relevant byte of the key as a boolean array)
+		boolean[] out8 = new boolean[8];			//(stores relevant byte of output array)
+		for(int x = 0; x < input.length; x++) {		//for each byte of input:
+			in8 = toBinary(input[x]);					//represent the input byte and the corresponding key byte in binary as boolean arrays
+			key8 = toBinary(key[x%key.length]);
+			for(int i = 0; i < in8.length; i++) {		//for each pair of corresponding bits in the key and input bytes:
+				if(in8[i] ^ key8[i]) {						//if they are the same, store 1/true in corresponding bit of output byte
+					out8[i] = true;
+				}
+				else {										//otherwise, store 0/false in corresponding bit of output byte
+					out8[i] = false;
+				}
+			}
+			output[x] = toByte(out8);						//convert output byte from boolean[] to byte and store in output array
 		}
 		return output;
 	}
@@ -25,7 +39,6 @@ public class Cipher {
 	//converts a byte to a boolean array of length 8
 	private boolean[] toBinary(byte input) {
 		short sh = (short)(input + 128);						//convert byte of range -128 - 127 into short of range 0 255
-		System.out.println(sh);
 		boolean[] output = new boolean[8];
 		for(byte n = 0; n < output.length; n++) {			//for each power of two from 0 to 7:4
 			if(sh%2 == 1) {
