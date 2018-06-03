@@ -1,25 +1,48 @@
-package com.xor.ci;
+package com.test.util;
 
-public class Cipher {
+import java.util.Scanner;
 
-	public Cipher() {
-		
+public class Main {
+	
+	byte by;
+	short sh;
+	boolean[] blA;
+	String input;
+	String output;
+	Scanner reader;
+	
+	public Main() {
+		reader = new Scanner (System.in);
+		boolean proceed = true;
+		while(proceed == true) {
+			output = "";
+			System.out.print("> ");
+			input = reader.nextLine();
+			try {
+				by = Byte.valueOf(input);
+			}
+			catch(NumberFormatException ex) {
+				proceed = false;
+			}
+			blA = toBinary(by);
+			for(int i = blA.length - 1; i > -1; i--) {
+				if(blA[i] == true) {
+					output += "1";
+				}
+				else {
+					output += "0";
+				}
+			}
+			System.out.println(output);
+			byte by2 = toByte(blA);
+			System.out.println(by2);
+		}
+		reader.close();
+
 	}
 	
-	public byte[] XOR(byte[] input, byte[] key) {
-		byte[] output = new byte[input.length];
-		for(int x = 0; x < input.length; x++) {
-			output[x] = key[x%key.length];
-		}
-		return output;
-	}
-	
-	public byte[] newRandomKey() {
-		byte[] output = new byte[8];
-		for(int i = 0; i < output.length; i++) {
-			output[i] = (byte)(Math.random()*256);
-		}
-		return output;
+	public static void main(String[] args) {
+		new Main();
 	}
 	
 	//converts a byte to a boolean array of length 8
@@ -50,5 +73,4 @@ public class Cipher {
 		byte output = (byte)(sh - 128);						//store short of range 0 - 255 in byte of range -128 - 127 and return
 		return output;
 	}
-	
 }
