@@ -79,13 +79,13 @@ public class Main implements ActionListener {
 		}
 		else {
 			proceed = false;
-			statusLbl.setText("Invalid File(s)");
+			statusLbl.setText("Errror: Invalid File(s)");					//report if files are invalid
 		}
 		
 		input = paperwork.readFile(inputFileTF.getText());					//read in input file
 		
 		if(proceed == true) {
-			statusLbl.setText("Working...");
+			statusLbl.setText("Working...");								//Display "Working..." if ciphering is in progress
 			if(ae.getSource().equals(encryptBtn)) {							//If ENCRYPT is pushed:
 				key = cipher.newRandomKey();									//create a random key
 				output = cipher.XOR(input, key);								//encrypt input using that key
@@ -94,10 +94,10 @@ public class Main implements ActionListener {
 			}
 			else {															//If Decrypt is pushed:
 				key = paperwork.readFile(keyFileTF.getText());					//read in key file
-				output = cipher.XOR(input, key);								//encrypt output using key
+				output = cipher.XOR(input, key);								//encrypt input using key
 				paperwork.writeFile(outputFileTF.getText(), output);			//write output to output file
 			}
-			statusLbl.setText("Done");
+			statusLbl.setText("Done");										//Display "Done" upon completion of encryption
 		}
 		
 	}
