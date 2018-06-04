@@ -75,14 +75,17 @@ public class Main implements ActionListener {
 		if(paperwork.checkFile(inputFileTF.getText()) && paperwork.checkFile(keyFileTF.getText())
 				&& paperwork.checkFile(outputFileTF.getText())) {			//only proceed if files in question exist
 			proceed = true;
+			statusLbl.setText("");
 		}
 		else {
 			proceed = false;
+			statusLbl.setText("Invalid File(s)");
 		}
 		
 		input = paperwork.readFile(inputFileTF.getText());					//read in input file
 		
 		if(proceed == true) {
+			statusLbl.setText("Working...");
 			if(ae.getSource().equals(encryptBtn)) {							//If ENCRYPT is pushed:
 				key = cipher.newRandomKey();									//create a random key
 				output = cipher.XOR(input, key);								//encrypt input using that key
@@ -94,9 +97,9 @@ public class Main implements ActionListener {
 				output = cipher.XOR(input, key);								//encrypt output using key
 				paperwork.writeFile(outputFileTF.getText(), output);			//write output to output file
 			}
+			statusLbl.setText("Done");
 		}
 		
 	}
-	
 
 }
