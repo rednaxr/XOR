@@ -1,3 +1,7 @@
+//Cipher Class of XOR Cipher
+//by: Alexander Dyall & Raveena Manivannan
+//4 June 2018
+
 package com.xor.ci;
 
 public class Cipher {
@@ -31,7 +35,7 @@ public class Cipher {
 	public byte[] newRandomKey() {
 		byte[] output = new byte[8];
 		for(int i = 0; i < output.length; i++) {
-			output[i] = (byte)(Math.random()*256);
+			output[i] = (byte)(Math.random()*256 - 128);
 		}
 		return output;
 	}

@@ -1,12 +1,12 @@
+//Main Class (GUI & Overall Control) of XOR Cipher
+//by: Alexander Dyall & Raveena Manivannan
+//4 June 2018
+
 package com.xor.ci;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,7 +47,7 @@ public class Main implements ActionListener {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 		
-		//Set up components & to window
+		//Set up components & add to window
 		window.add(inputFileLbl);
 		inputFileLbl.setHorizontalAlignment(JLabel.CENTER);
 		window.add(inputFileTF);
@@ -85,17 +85,16 @@ public class Main implements ActionListener {
 		input = paperwork.readFile(inputFileTF.getText());					//read in input file
 		
 		if(proceed == true) {
-			statusLbl.setText("Working...");								//Display "Working..." if ciphering is in progress
 			if(ae.getSource().equals(encryptBtn)) {							//If ENCRYPT is pushed:
 				key = cipher.newRandomKey();									//create a random key
 				output = cipher.XOR(input, key);								//encrypt input using that key
-				paperwork.writeFile(outputFileTF.getText(), output);			//write output to output file
-				paperwork.writeFile(keyFileTF.getText(), key);					//write key to key file
+				paperwork.writeFile(output, outputFileTF.getText());			//write output to output file
+				paperwork.writeFile(key, keyFileTF.getText());					//write key to key file
 			}
 			else {															//If Decrypt is pushed:
 				key = paperwork.readFile(keyFileTF.getText());					//read in key file
 				output = cipher.XOR(input, key);								//encrypt input using key
-				paperwork.writeFile(outputFileTF.getText(), output);			//write output to output file
+				paperwork.writeFile(output, outputFileTF.getText());			//write output to output file
 			}
 			statusLbl.setText("Done");										//Display "Done" upon completion of encryption
 		}
